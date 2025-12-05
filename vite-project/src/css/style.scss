@@ -1,0 +1,68 @@
+//*戸田の書き方（超キモイので苦情受け付けます。24h営業）
+
+//*以下の順番で記述してる。
+//css変数（カラーを変数として保存:$main-color:#00ff00など）
+//mixin (共通スタイルの設定:@mixin mix-flex()など)
+//components (各componentsのスタイル:.btn{}など）
+//pages (各pagesのスタイル:.home{}など)
+//id (js用かつスタイルを若干変える時に使う:#btn{})
+//js (メニュー出現などのjs用:open-Slider{},close-Sliderなど"-"で繋げている物はjs用です)
+
+//*コメントアウトについて
+//「//~~~~~~~~~~~~~~~~」は項目の目印(css変数、mixin、components、pagesなど)
+//「//*」はセレクタの目印(.post{}.btn{}.home{}など)
+//「//」は注釈
+//「//todo」は後でやる
+//「//!」は注意点やエラー
+//「//?」は疑問
+
+//*以下からスタイリング
+@charset "utf-8";
+
+//css変数~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$main-color: "";
+$sub-color: "";
+$accent-color: "";
+
+//*ダミー用
+$dummy-color: "#CCCCCC";
+
+
+//mixin~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+//*横並べ用のmixin
+@mixin mix-flex($a: center, $j: space-between) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: $j;
+    align-items: $a;
+}
+
+//*inner用のmixin
+@mixin mix-inner($w: 90%, $mw: 1200px) {
+    width: $w;
+    max-width: $mw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+//*レスポンシブ用のmixin
+$breakpoints: (
+    "tablet": "screen and (min-width: 640px)",
+    "desktop": "screen and (min-width: 800px)",
+    "full": "screen and (min-width: 1200px)",
+    ) !default;
+
+@mixin mix-query($breakpoint) {
+    @media #{map-get($breakpoints, $breakpoint)} {
+        @content;
+    }
+}
+
+//components~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+//pages~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+//id~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+//js~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
