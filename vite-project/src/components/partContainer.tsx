@@ -1,27 +1,98 @@
-//*髪や目、鼻などのパーツを格納するコンテナのコンポーネント
+//*配置するパーツのコンポーネント
+//*必要機能をインポート
+import React, { useState, useCallback, useRef } from 'react';
 
-//*必要機能をimport
-import React from 'react';
-
-//*どんな値が受け渡されるか指定（追加のclass名、oclick属性など）
-interface partContainerProps {
-    class?: string;
-    children?: React.ReactNode;
+//画像の位置情報を宣言
+interface Position {
+    x: number;
+    y: number;
 }
 
-//*処理
-function partContainer({ className = "", children, ...rest }: partContainerProps & React.ComponentPropsWithoutRef<'article'>) {
+//画像の概要を宣言
+interface DraggableImageProps {
+    imgUrl: string;
+    initialX: number; // 初期位置(0)
+    initialY: number; // 初期位置(0)
+    onDragEnd: (x: number, y: number) => void; // 親のstateを更新するための関数
+}
 
-    //基本クラスと追加クラスを合体してcombinedClassを作成
-    const baseClass = "partContainer";
-    const combinedClass = `${baseClass} ${className}`;
+//処理
+const DraggableImage: React.FC<DraggableImageProps> = ({ imgUrl, initialX, initialY, onDragEnd }) => {
+
+    // 初期値に親から来た座標をセット
+    const [position, setPosition] = useState<Position>({ x: initialX, y: initialY });
+
+    //ドラッグ中かどうかを管理
+    const [isDragging, setIsDragging] = useState<boolean>(false);
+    //クリックした位置と画像左上隅とのオフセット
+    const offsetRef = useRef<Position>({ x: 0, y: 0 });
+
+    //画像のスタイルを設定
+    const imageStyle: React.CSSProperties = {
+        position: 'absolute',
+        //useStateのpositionの値から連動
+        left: position.x,
+        top: position.y,
+        //マウス形状
+        cursor: isDragging ? 'grabbing' : 'grab',
+        userSelect: 'none',
+        //画像を持つための最低限の領域を確保
+        width: '100px',
+        height: '100px',
+        borderRadius: '8px',
+        border: isDragging ? '3px solid #CCCCCC' : 'none',
+        transition: 'border-color 0.1s',
+    };
+
+    //画像のクリック処理
+    const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+        //動かした画像の位置を計算
+        offsetRef.current = {
+            x: e.clientX - position.x,
+            y: e.clientY - position.y,
+        };
+
+        //移動を可能にする
+        setIsDragging(true);
+
+    }, [position]);
+
+    //画像のドラック処理
+    const handleMouseMove = useCallback((e: MouseEvent) => {
+        if (!isDragging) return;
+
+        //新しい画像の位置を計算
+        const newX = e.clientX - offsetRef.current.x;
+        const newY = e.clientY - offsetRef.current.y;
+
+        setPosition({ x: newX, y: newY });
+    }, [isDragging]);
+
+    //画像のリムーブ処理
+    const handleMouseUp = useCallback(() => {
+        if (isDragging) {
+            setIsDragging(false);
+            // ★ドラッグ終了時に親へ報告！
+            onDragEnd(position.x, position.y);
+        }
+    }, [isDragging, position, onDragEnd]);
+
+    //常に処理（マウスの動きを常に監視）
+    React.useEffect(() => {
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+
+        return () => {
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+        };
+    }, [handleMouseMove, handleMouseUp]);
 
     return (
-        <article className={combinedClass} {...rest}>
-            <img className='partContainer__part' src="https://placehold.jp/100x100.png" alt="" />
-            <p className='partContainer__name'>{children}</p>
-        </article>
+        <div className='part' style={imageStyle} onMouseDown={handleMouseDown} >
+            <img className='part__img' src={imgUrl}></img>
+        </div>
     );
-}
+};
 
-export default partContainer;
+export default DraggableImage;

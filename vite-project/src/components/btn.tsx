@@ -1,18 +1,43 @@
+//*ボタンコンポーネント
+//*必要機能をインポート
 import React from 'react';
 
+//親から受け取るパーツ情報を宣言
 interface BtnProps {
-    class?: string;
-    children?: React.ReactNode;
+    mode: "textBtn" | "textAndImgBtn";
+    text: string;
+    addClass?: string;
+    clickEvent?: () => void;
+    imgUrl?: string;
 }
 
-function Btn({ className = "", children, ...rest }: BtnProps & React.ComponentPropsWithoutRef<'button'>) {
 
+function Btn({ mode, text, addClass, clickEvent, imgUrl }: BtnProps) {
+
+    //クラス名を作成
     const baseClass = "btn";
-    const combinedClass = `${baseClass} ${className}`;
+    const combinedClass = `${baseClass} ${addClass}`;
 
-    return (
-        <button className={combinedClass}{...rest}>{children}</button>
-    );
+    if (mode == "textBtn") {
+        return (
+            <div className={combinedClass} onClick={clickEvent}>
+                <button>
+                    {text}
+                </button>
+            </div>
+        );
+    }
+    else if (mode == "textAndImgBtn") {
+        return (
+            <div className={combinedClass} onClick={clickEvent}>
+                <button>
+                    {text}
+                </button>
+                <img src={imgUrl} alt="" />
+            </div>
+        );
+    }
+
 }
 
 export default Btn;
