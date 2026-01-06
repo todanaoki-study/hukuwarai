@@ -52,7 +52,6 @@ const App: React.FC = () => {
     { id: 'right-eye', imgUrl: rightEyeImg, x: 150, y: 50, width: 15, height: 15 },
     { id: 'left-eye', imgUrl: leftEyeImg, x: 150, y: 50, width: 15, height: 15 },
     { id: "mouse", imgUrl: mouthImg, x: 150, y: 50, width: 34, height: 31 },
-
   ]);
 
   // 特定のパーツの位置を更新する関数

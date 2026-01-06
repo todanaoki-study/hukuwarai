@@ -22,7 +22,6 @@ const Play: React.FC<PlayProps> = ({ setGameState, parts, updatePartPos, playerL
     //表示するhtmlを作成
     return (
         <div className='play'>
-
             <div className="play__inner">
                 <h2>プレイ画面</h2>
                 <div className='userContainer'>
