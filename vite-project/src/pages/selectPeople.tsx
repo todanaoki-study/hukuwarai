@@ -71,6 +71,7 @@ const selectPeople: React.FC<selectPeopleProps> = ({ setGameState, setPlayerList
                     mode='textBtn'
                     text="レベルセレクトへ"
                     clickEvent={() => setGameState("selectImg")}
+
                 />
             </div>
         </div>

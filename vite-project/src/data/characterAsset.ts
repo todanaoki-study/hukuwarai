@@ -1,40 +1,39 @@
-// src/data/characterAssets.ts
-import { CharacterAsset } from "../types/parts";
+//キャラクターの画像全データを保持するファイルをインポート
+import type { CharacterAsset } from "../types/partsData";
 
-// Viteで画像をインポート
 //画像をインポート
 //?猫
-import cat from '../assets/cat/all.png';
-import catRightEar from '../assets/cat/ear_right.png';
-import catLeftEar from '../assets/cat/ear_left.png';
-import catContour from "../assets/cat/contour.png";
-import catRightEye from '../assets/cat/eye_right.png';
-import catLeftEye from '../assets/cat/eye_left.png';
-import catMouth from '../assets/cat/mouth.png';
+import cat from '../assets/material/cat/all.png';
+import catRightEar from '../assets/material/cat/ear_right.png';
+import catLeftEar from '../assets/material/cat/ear_left.png';
+import catContour from "../assets/material/cat/contour.png";
+import catRightEye from '../assets/material/cat/eye_right.png';
+import catLeftEye from '../assets/material/cat/eye_left.png';
+import catMouth from '../assets/material/cat/mouth.png';
 
 //?クマ
-import bear from "../assets/bear/all.png";
-import bearRightEar from "../assets/bear/ear_right.png";
-import bearLeftEar from "../assets/bear/ear_left.png";
-import bearContour from "../assets/bear/contour.png";
-import bearNose from "../assets/bear/nose.png";
+import bear from "../assets/material/bear_1/all.png";
+import bearRightEar from "../assets/material/bear_1/ear_right.png";
+import bearLeftEar from "../assets/material/bear_1/ear_left.png";
+import bearContour from "../assets/material/bear_1/contour.png";
+import bearNose from "../assets/material/bear_1/nose.png";
 
-import bearMouth from "../assets/bear/mouth.png";
-import bearBody from "../assets/bear/body.png";
-import bearRightEye from "../assets/bear/eye_right.png";
-import bearLeftEye from "../assets/bear/eye_left.png";
-import bearRightBrows from "../assets/bear/eyebrows_left.png";
+import bearMouth from "../assets/material/bear_1/mouth.png";
+import bearBody from "../assets/material/bear_1/body.png";
+import bearRightEye from "../assets/material/bear_1/eye_right.png";
+import bearLeftEye from "../assets/material/bear_1/eye_left.png";
+import bearRightBrows from "../assets/material/bear_1/eyebrows_left.png";
 
-import bearLeftBrows from "../assets/bear/eyebrows_right.png";
-import baseHair from "../assets/bear/hair.png";
-import bearTail from "../assets/bear/tail.png";
-import bearLeftArm from "../assets/bear/arm_left.png";
-import bearRightArm from "../assets/bear/arm_right.png";
+import bearLeftBrows from "../assets/material/bear_1/eyebrows_right.png";
+import baseHair from "../assets/material/bear_1/hair.png";
+import bearTail from "../assets/material/bear_1/tail.png";
+import bearLeftArm from "../assets/material/bear_1/arm_left.png";
+import bearRightArm from "../assets/material/bear_1/arm_right.png";
 
 
-
-// 外から使えるように export const で宣言
+//以下のデータを外部から参照できるようにCharacterAssetに入れてエクスポートする。
 export const CHARACTER_ASSETS: Record<string, CharacterAsset> = {
+    //全キャラの画像や初期の幅、高さ、パーツ情報などをここでまとめて管理する。
     cat: {
         name: "cat",
         bgImg: cat,
@@ -49,7 +48,7 @@ export const CHARACTER_ASSETS: Record<string, CharacterAsset> = {
     },
 
     bear1: {
-        name: "bear",
+        name: "bear1",
         bgImg: bear,
         parts: [
             { id: 'ear-right', imgUrl: bearRightEar, x: 50, y: 80, width: 40, height: 40 },
@@ -70,4 +69,6 @@ export const CHARACTER_ASSETS: Record<string, CharacterAsset> = {
             { id: 'arm-right', imgUrl: bearRightArm, x: 150, y: 80, width: 40, height: 40 },
         ]
     },
+
+    //以下に同じような形でキャラクターを追加していく。
 };

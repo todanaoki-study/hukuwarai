@@ -111,6 +111,14 @@ $breakpoints: (
 
 //*各パーツ
 .part {
+    position: absolute;
+    user-select: none;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 8px;
+    transition: 'border-color 0.1s';
+    //厳密な位置や調整はpartContainer.tsxにて行っている。
+
     &__img {
         pointer-events: none;
     }
@@ -166,64 +174,27 @@ $breakpoints: (
 }
 
 //*モーダルウィンドウのコンポーネント
-.explanation {
-    //一旦白背景
-    background: rgba($color: #fff, $alpha: .6);
-    min-height: 100vh;
-    position: relative;
+.modal {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url(assets/other/modalBg.png);
     z-index: 999;
+    border: 10px solid $accentColor2;
 
-    &__window {
-        @include mix-position-control();
-        z-index: 100;
-        background: $baseColor;
-        border: 3px solid $accentColor4 ;
-        border-radius: 7px;
-        padding: 30px;
-        text-align: center;
-        width: 70%;
-    }
-
-    &__title {
-        margin-bottom: 20px;
+    &__origin {
+        position: relative;
+        height: 100%;
     }
 
     &__container {
-        background: $mainColor;
-        padding: 5px;
-        border-radius: 7px;
-
-        &:not(:last-child) {
-            margin-bottom: 20px;
-        }
-
-        &:nth-of-type(2) {
-            background: $accentColor2;
-        }
-
-        &:nth-of-type(3) {
-            background: $accentColor3;
-        }
-    }
-
-    &__content {
-        border: 2px dashed #fff;
-        border-radius: 7px;
-    }
-
-    &__level {
-        background: #fff;
-        border-radius: 7px;
-        display: block;
-        width: 70%;
-        margin: 10px auto;
-        font-weight: bold;
-    }
-
-    &__overview {
-        color: #fff;
-        font-size: 14px;
-        margin-bottom: 10px;
+        @include mix-position-control();
+        border: 3px solid $accentColor4;
+        border-radius: 5px;
+        background: $baseColor;
+        width: 80%;
     }
 }
 
@@ -482,6 +453,8 @@ body {
     &__img {
         display: block;
         margin-right: 5px;
+        aspect-ratio: 1 / 1;
+        object-fit: contain;
     }
 
     & .easy {
@@ -530,6 +503,7 @@ body {
     }
 }
 
+//ボード部分
 .board {
     position: relative;
     margin: 120px 0 60px;
@@ -539,8 +513,127 @@ body {
     background: #fff;
     border: 8px solid $accentColor4;
     border-radius: 15px;
+
+    &__assistant {
+        position: absolute;
+        top: -110px;
+        right: 0;
+    }
 }
 
+//プレイ画面上部のコントローラ
+.playHeader {
+
+    @include mix-flex(center);
+
+    &__controls {
+        @include mix-flex();
+        gap: 10px;
+    }
+
+    &__btn {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+
+        &:nth-of-type(1) {
+            & .playHeader__btnText {
+                color: $accentColor2;
+            }
+        }
+
+        &:nth-of-type(2) {
+            & .playHeader__btnText {
+                color: $accentColor3;
+            }
+        }
+    }
+
+    &__btnText {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+
+    //todo 今なんかhoverのtransitionが効かない。あとで直す。
+    &__img {
+        display: block;
+        transition: .3 ease-in-out;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
+
+//モーダルウィンドウ（難易度説明）
+.explanation {
+    &__inner {
+        @include mix-inner();
+        text-align: center;
+    }
+
+    &__title {
+        margin: 20px 0;
+        font-weight: bold;
+        color: $accentColor4;
+    }
+
+    &__container {
+        margin-bottom: 20px;
+        background: $mainColor;
+        padding: 10px;
+        border-radius: 5px;
+
+        &:nth-of-type(2) {
+            background: $accentColor2;
+        }
+
+        &:nth-of-type(3) {
+            background: $accentColor3;
+        }
+    }
+
+    &__content {
+        border: 2px dashed #fff;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    &__level {
+        font-weight: bold;
+        background: #fff;
+        width: 75%;
+        margin: 0 auto 10px;
+        border-radius: 10px;
+    }
+
+    &__overview {
+        color: #fff;
+    }
+}
+
+//モーダルウィンドウ（ヘルプ）
+.help {
+    &__inner {
+        @include mix-inner();
+        text-align: center;
+    }
+
+    &__title {
+        margin: 20px 0;
+        font-weight: bold;
+        color: $accentColor4;
+    }
+
+    &__content {
+        border: 2px dashed #000;
+        padding: 10px;
+        border-radius: 5px;
+        background: #fff;
+        text-align: left;
+        margin-bottom: 20px;
+    }
+}
 
 //id~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

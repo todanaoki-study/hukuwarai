@@ -7,3 +7,10 @@ export interface PartData {
     width: number;
     height: number;
 }
+
+// キャラクター全体の型
+export interface CharacterAsset {
+    name: string;
+    bgImg: string;
+    parts: PartData[];
+}

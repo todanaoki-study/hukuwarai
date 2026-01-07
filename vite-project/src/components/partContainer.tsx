@@ -29,19 +29,13 @@ const DraggableImage: React.FC<DraggableImageProps> = ({ imgUrl, initialX, initi
 
     //画像のスタイルを設定
     const imageStyle: React.CSSProperties = {
-        position: 'absolute',
         //useStateのpositionの値から連動
         left: position.x,
         top: position.y,
         //マウス形状
         cursor: isDragging ? 'grabbing' : 'grab',
-        userSelect: 'none',
         //画像を持つための最低限の領域を確保
-        width: '100px',
-        height: '100px',
-        borderRadius: '8px',
         border: isDragging ? '3px solid #CCCCCC' : 'none',
-        transition: 'border-color 0.1s',
     };
 
     //画像のクリック処理

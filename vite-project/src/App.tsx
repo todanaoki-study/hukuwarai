@@ -1,5 +1,5 @@
 //*全てのページを管理する親ファイル
-//*表示するページを管理するオブザーバー
+//表示するページを管理するオブザーバー
 import React, { useState, useEffect } from 'react';
 import './CSS/style.min.css'
 
@@ -13,51 +13,50 @@ import Result from './pages/result';
 
 //必要なデータタイプを読み込む
 import type { Player } from "./types/playerData";
-import type { ImgData } from "./types/imgData";
-import type { PartData } from "./types/partsData";
+//キャラクターの全体情報をインポート（座標や表示状態など）
+import type { PartData, CharacterAsset } from "./types/partsData";
+//キャラクターデータをインポート(猫やクマ、ユニコーンなど全部以下のファイルに入っている)
+import { CHARACTER_ASSETS } from "./data/characterAsset";
 
-//画像をインポート
-import rightEarImg from '/assets/cat/cat-rightEar.png';
-import leftEarImg from '/assets/cat/cat-leftEar.png';
-import contourImg from "/assets/cat/cat-contour.png";
-
-import rightEyeImg from '/assets/cat/cat-rightEye.png';
-import leftEyeImg from '/assets/cat/cat-leftEye.png';
-import mouthImg from '/assets/cat/cat-mouth.png';
-
-//処理
 const App: React.FC = () => {
-
   //*スイッチ一覧
   //ゲーム状態のスイッチ（スプラッシュ→タイトル→プレイ画面など）
   const [gameState, setGameState] = useState<"splash" | "title" | "selectPeople" | "selectImg" | "play" | "result">("splash");
-
-  //ゲーム難易度のスイッチ（イージー、ノーマル、ハードなど）
-  const [gameLevel, setGameLevel] = useState<"easy" | "normal" | "heard">("easy");
 
   //プレイヤーのデータのスイッチ（人数や名前、アイコンなど）
   const [playerList, setPlayerList] = useState<Player[]>([
     { id: 1, userName: "", userIconUrl: "/src/assets/other/user.png" }
   ]);
 
-  //今なんの画像で遊んでいるかのスイッチ
-  const [choiceImg, setChoiceImg] = useState<ImgData[]>([{ id: null, level: 1, imgName: "sample", imgOverAllUrl: "https://placehold.jp/150x150.png" }]);
+  //福笑いで使う画像の切り替えスイッチ
+  const [selectedCharacter, setSelectedCharacter] = useState<CharacterAsset | null>(null);
 
-
-  // パーツの位置情報を一括管理するスイッチ
+  // パーツの位置情報を管理するスイッチ
   const [parts, setParts] = useState<PartData[]>([
-    { id: 'right-ear', imgUrl: rightEarImg, x: 50, y: 50, width: 45, height: 54 },
-    { id: 'left-ear', imgUrl: leftEarImg, x: 150, y: 50, width: 45, height: 54 },
-    { id: 'contour', imgUrl: contourImg, x: 150, y: 50, width: 112, height: 112 },
-    { id: 'right-eye', imgUrl: rightEyeImg, x: 150, y: 50, width: 15, height: 15 },
-    { id: 'left-eye', imgUrl: leftEyeImg, x: 150, y: 50, width: 15, height: 15 },
-    { id: "mouse", imgUrl: mouthImg, x: 150, y: 50, width: 34, height: 31 },
   ]);
+  //!モーダルの切り替えだけ各ページに状態管理を持たせてるんで気おつけてね！
+
+  useEffect(() => {
+    //プレイヤーが追加されるごとに記録
+    console.log("Current Players:", playerList);
+  }, [playerList]);
 
   // 特定のパーツの位置を更新する関数
   const updatePartPos = (id: string, x: number, y: number) => {
     setParts(prev => prev.map(p => p.id === id ? { ...p, x, y } : p));
   };
+
+  //画像選択画面でキャラクターが選ばれたときの処理
+  const handleSelect = (id: string) => {
+    const data = CHARACTER_ASSETS[id];
+    if (data) {
+      //選ばれたキャラの情報を格納する
+      setParts(data.parts);
+      setSelectedCharacter(data);
+      setGameState('play');
+    }
+  };
+
 
   //今何のゲーム画面を映すべきか選ぶ処理
   const renderScreen = () => {
@@ -74,9 +73,9 @@ const App: React.FC = () => {
         >
         </SelectPeople>
       case "selectImg":
-        return <SelectImg setGameState={setGameState} />;
+        return <SelectImg onSelect={handleSelect} />;
       case "play":
-        return <Play setGameState={setGameState} parts={parts} updatePartPos={updatePartPos} playerList={playerList} />;
+        return <Play setGameState={setGameState} parts={parts} updatePartPos={updatePartPos} playerList={playerList} sampleImg={selectedCharacter?.bgImg || ""} />;
       case "result":
         return <Result setGameState={setGameState} parts={parts} />;
       default: return <Splash setGameState={setGameState} />;

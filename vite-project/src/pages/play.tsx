@@ -1,42 +1,62 @@
 //*ゲームプレイ画面
 
 //*必要機能をimport
-import React from 'react';
+import React, { useState } from "react";
 import DraggableImage from '../components/partContainer';
-import UserContainer from '../components/userContainer';
 import Btn from '../components/btn';
+import Modal from "../components/modal";
 
 //必要なデータ型をインポート
-import type { PartData } from "../types/partsData";
+import type { PartData, CharacterAsset } from "../types/partsData";
 import type { Player } from "../types/playerData";
 
-//親（App.tsx）から渡ってくるゲーム状態を受け取るための型を用意。ちなこれ丸ハラね。
+//親（App.tsx）から渡ってくるゲーム状態を受け取るための型を用意。
 interface PlayProps {
     setGameState: (state: "splash" | "title" | "play" | "result") => void;
     parts: PartData[];
     updatePartPos: (id: string, x: number, y: number) => void;
-    playerList: Player[]
+    playerList: Player[];
+    sampleImg: string; // ★お手本画像のURLを受け取るために追加
 }
 
-const Play: React.FC<PlayProps> = ({ setGameState, parts, updatePartPos, playerList }) => {
+const Play: React.FC<PlayProps> = ({ setGameState, parts, updatePartPos, playerList, sampleImg }) => {
+
+    let modalMode = "help";
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
+
     //表示するhtmlを作成
     return (
         <div className='play'>
+            <Modal mode={modalMode} state={isModalOpen} setModal={setIsModalOpen}></Modal>
             <div className="play__inner">
-                <h2>プレイ画面</h2>
-                <div className='userContainer'>
-                    <div className="userContainer__iconContainer iconContainer">
-                        <p className='iconContainer__number'>1P</p>
-                        <img className='iconContainer__img' src="https://placehold.jp/35x35.png" alt="" />
-                    </div>
+                <div className='play__header playHeader'>
+                    <ul className='playHeader__activeList'>
+                        <li className='playHeader__user'>〇〇の番</li>
+                        <li className='playHeader__user'>次は〇〇の番</li>
+                    </ul>
 
-                    <label htmlFor="" className='userContainer__label'>
-                        <p>サンプルさんの番</p>
-                    </label>
+                    <div className='playHeader__controls'>
+                        <dl className='playHeader__btn'>
+                            <dt className='playHeader__btnText'>ホーム</dt>
+                            <dd className='playHeader__img' onClick={() => setGameState("title")}>
+                                <img src="/src/assets/other/home.png" alt="" />
+                            </dd>
+                        </dl>
+                        <dl className='playHeader__btn'>
+                            <dt className='playHeader__btnText'>ヘルプ</dt>
+                            <dd className='playHeader__img' onClick={() => setIsModalOpen(true)}>
+                                <img src="/src/assets/other/help.png" alt="" />
+                            </dd>
+                        </dl>
+                    </div>
                 </div>
 
-                {/* 画像をダウンロードした時に背景色は#fffにするようにする */}
+                <div className="play__sample">
+                    <img className="play__sampleImg" src={sampleImg} alt="" />
+                </div>
+
                 <div className='play__board board'>
+                    <img className='board__assistant' src="./src/assets/other/boardChara.png" alt="" />
                     {/* パーツを一旦左上に全部配置 */}
                     {parts.map((part) => (
                         <DraggableImage
