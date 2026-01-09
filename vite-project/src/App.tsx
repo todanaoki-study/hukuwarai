@@ -1,7 +1,6 @@
 //*全てのページを管理する親ファイル
 //表示するページを管理するオブザーバー
 import React, { useState, useEffect } from 'react';
-import './CSS/style.min.css'
 
 //必要なページを読み込む（ゲームフロー順に並んでる）
 import Splash from './pages/splash';
