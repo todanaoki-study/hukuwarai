@@ -64,6 +64,12 @@ const selectImg: React.FC<selectImgProps> = ({ onSelect }) => {
                         characterImg={CHARACTER_ASSETS.bear1.bgImg}
                     />
 
+                    <Img
+                        clickEvent={() => onSelect("bear2")}
+                        level="easy"
+                        characterImg={CHARACTER_ASSETS.bear2.bgImg}
+                    />
+
                 </div>
 
                 <div className="selectImg__container">

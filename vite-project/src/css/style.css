@@ -307,31 +307,81 @@ body .font-daruma {
 }
 
 .play {
-  background: #FFFBD9;
+  background: #DF3E3E;
   min-height: 100vh;
+  position: relative;
 }
 .play__inner {
   width: 90%;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #FFFBD9;
+  height: 90%;
+  border-radius: 15px;
+  overflow-y: auto;
+  padding: 0 20px;
+}
+.play__sample {
+  display: block;
+  width: 40%;
+  margin: 30px 0;
+}
+.play__sampleImg {
+  display: block;
+  aspect-ratio: 1/1;
+  -o-object-fit: contain;
+     object-fit: contain;
+  border: 5px solid #DF3E3E;
+  border-radius: 7px;
+  background: rgba(241, 241, 241, 0.7);
+  padding: 10px;
 }
 
 .result {
-  background: #FFFBD9;
+  background: #DF3E3E;
   min-height: 100vh;
+  position: relative;
 }
 .result__inner {
   width: 90%;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #FFFBD9;
+  height: 90%;
+  border-radius: 15px;
+  overflow-y: auto;
 }
 .result__title {
   font-size: 20px;
+  width: 100%;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 30px;
+  margin: 20px 0;
+  color: #fff;
+  background: #6E4339;
+}
+.result__container {
+  padding: 0 20px;
+}
+.result__controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+.result__btn {
+  width: 45%;
 }
 
 .level {
@@ -409,13 +459,12 @@ body .font-daruma {
 
 .board {
   position: relative;
-  margin: 120px 0 60px;
-  min-width: 100%;
-  min-height: 60vh;
-  height: 500px;
-  background: #fff;
+  margin-bottom: 60px;
+  max-width: 500px;
+  background: rgba(241, 241, 241, 0.7);
   border: 8px solid #6E4339;
   border-radius: 15px;
+  aspect-ratio: 1/1;
 }
 .board__assistant {
   position: absolute;
@@ -428,6 +477,8 @@ body .font-daruma {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 3px dashed #6E4339;
+  padding-bottom: 10px;
 }
 .playHeader__controls {
   display: flex;

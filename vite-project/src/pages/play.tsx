@@ -72,7 +72,8 @@ const Play: React.FC<PlayProps> = ({ setGameState, parts, updatePartPos, playerL
 
                 <Btn
                     mode='textBtn'
-                    text='結果画面へ'
+                    text='これでかんせい！'
+                    addClass="btn__red"
                     clickEvent={() => setGameState("result")}
                 />
             </div>

@@ -8,7 +8,7 @@ import type { PartData } from "../types/partsData";
 
 //親（App.tsx）から渡ってくるデータを受け取るための型を用意。
 interface ResultProps {
-    setGameState: (state: "splash" | "title" | "play" | "result") => void;
+    setGameState: (state: "splash" | "title" | "selectImg" | "play" | "result") => void;
     //親からパーツの位置情報を受け取る
     parts: PartData[];
 }
@@ -40,42 +40,50 @@ const Result: React.FC<ResultProps> = ({ setGameState, parts }) => {
     return (
         <div className='result'>
             <div className="result__inner">
-                <h2 className='result__title'>完成</h2>
+                <h2 className='result__title'>かんせいしたイラスト</h2>
                 {/* この範囲が画像として保存される */}
-                <div ref={resultAreaRef} className='result__board board'>
-                    {/* 配置されたパーツを描画(mapを使ってパーツ全てを順番に描画) */}
-                    {parts.map((part) => (
-                        <img
-                            key={part.id}
-                            src={part.imgUrl}
-                            alt={part.id}
-                            style={{
-                                position: 'absolute',
-                                left: part.x,
-                                top: part.y,
-                                width: `${part.width}px`,
-                                height: `${part.height}px`,
-                                pointerEvents: 'none'
-                            }}
-                        />
-                    ))}
-                </div>
-                <div className="result__controls">
+                <div className="result__container">
+                    <div ref={resultAreaRef} className='result__board board'>
+                        {/* 配置されたパーツを描画(mapを使ってパーツ全てを順番に描画) */}
+                        {parts.map((part) => (
+                            <img
+                                key={part.id}
+                                src={part.imgUrl}
+                                alt={part.id}
+                                style={{
+                                    position: 'absolute',
+                                    left: part.x,
+                                    top: part.y,
+                                    width: `${part.width}px`,
+                                    height: `${part.height}px`,
+                                    pointerEvents: 'none'
+                                }}
+                            />
+                        ))}
+                    </div>
+
                     <Btn
                         mode='textBtn'
                         text='画像を保存する'
                         clickEvent={handleDownload}
                     />
-                    <Btn
-                        mode='textBtn'
-                        text='もう一度遊ぶ'
-                        clickEvent={() => setGameState("play")}
-                    />
-                    <Btn
-                        mode='textBtn'
-                        text='ホームへ'
-                        clickEvent={() => setGameState("title")}
-                    />
+
+                    <div className="result__controls">
+
+                        <Btn
+                            mode='textBtn'
+                            text='ほーむへ'
+                            addClass='result__btn btn__red'
+                            clickEvent={() => setGameState("title")}
+                        />
+
+                        <Btn
+                            mode='textBtn'
+                            text='えらびなおす'
+                            addClass='result__btn'
+                            clickEvent={() => setGameState("selectImg")}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

@@ -30,6 +30,8 @@ const DraggableImage: React.FC<DraggableImageProps> = ({ imgUrl, initialX, initi
     //画像のスタイルを設定
     const imageStyle: React.CSSProperties = {
         //useStateのpositionの値から連動
+        transformOrigin: "center",
+
         left: position.x,
         top: position.y,
         //マウス形状
