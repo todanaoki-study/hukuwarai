@@ -50,6 +50,36 @@ import bear2RightArm from "../assets/material/bear_2/arm_right.png";
 import bear2LeftLeg from "../assets/material/bear_2/leg_left.png";
 import bear2RightLeg from "../assets/material/bear_2/leg_right.png";
 
+//?クマ3
+// import bear3 from "../assets/material/bear_3/all.png";
+// import bear3RightEar from "../assets/material/bear_3/ear_right.png";
+// import bear3LeftEar from "../assets/material/bear_3/ear_left.png";
+// import bear3Contour from "../assets/material/bear_3/contour.png";
+// import bear3Nose from "../assets/material/bear_3/nose.png";
+
+// import bear3Body from "../assets/material/bear_3/body.png";
+// import bear3RightEye from "../assets/material/bear_3/eye_right.png";
+// import bear3LeftEye from "../assets/material/bear_3/eye_left.png";
+// import bear3Hat from "../assets/material/bear_3/hat.png";
+// import bear3LeftArm from "../assets/material/bear_3/arm_left.png";
+
+// import bear3RightArm from "../assets/material/bear_3/arm_right.png";
+// import bear3LeftLeg from "../assets/material/bear_3/leg_left.png";
+// import bear3RightLeg from "../assets/material/bear_3/leg_right.png";
+// import bear3LeftBeard from "../assets/material/bear_3/beard_left.png;"
+// import bear3RightBeard from "../assets/material/bear_3/beard_right.png"
+
+//?キツネ
+import fox from "../assets/material/fox/all.png";
+import foxBody from "../assets/material/fox/body.png";
+import foxContour from "../assets/material/fox/contour.png";
+import foxLeftEar from "../assets/material/fox/ear_left.png";
+import foxRightEar from "../assets/material/fox/ear_right.png";
+import foxEye from "../assets/material/fox/eye.png";
+
+//?ユニコーン
+// import unicorn from "../"
+
 
 //以下のデータを外部から参照できるようにCharacterAssetに入れてエクスポートする。
 export const CHARACTER_ASSETS: Record<string, CharacterAsset> = {
@@ -117,6 +147,18 @@ export const CHARACTER_ASSETS: Record<string, CharacterAsset> = {
             { id: 'leg-left', imgUrl: bear2LeftLeg, x: 150, y: 80, width: 40, height: 48 },
             { id: 'leg-right', imgUrl: bear2RightLeg, x: 150, y: 80, width: 46, height: 44 },
         ]
-    }
+    },
     //以下に同じような形でキャラクターを追加していく。
+
+    fox: {
+        name: "fox",
+        bgImg: fox,
+        parts: [
+            { id: 'ear-right', imgUrl: foxRightEar, x: 50, y: 80, width: 48, height: 69 },
+            { id: 'ear-left', imgUrl: foxLeftEar, x: 150, y: 80, width: 48, height: 79 },
+            { id: 'contour', imgUrl: foxContour, x: 150, y: 80, width: 156, height: 113 },
+            { id: 'body', imgUrl: foxBody, x: 150, y: 80, width: 190, height: 132 },
+            { id: 'eye', imgUrl: foxEye, x: 150, y: 80, width: 15, height: 15 },
+        ]
+    },
 };

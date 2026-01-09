@@ -1,6 +1,5 @@
 //*ボタンコンポーネント
 //*必要機能をインポート
-import React from 'react';
 
 //親から受け取るパーツ情報を宣言
 interface BtnProps {

@@ -1,7 +1,6 @@
 //*ポップアップコンポーネント
 
 //*必要機能をインポート
-import React, { useState } from "react";
 import Btn from "./btn";
 
 //親から渡されるモーダルウィンドの内容を受け取る型を宣言
@@ -24,12 +23,11 @@ function modal({ mode, state, setModal }: modalProps) {
                 return (
                     <div className="modal">
                         <div className="modal__origin">
-                            <button onClick={() => setModal(false)} className="modal__closeBtn closeBtn">
-                                <span className="closeBtn__line" id="upperLine"></span>
-                                <span className="closeBtn__line" id="underLine"></span>
-                            </button>
-
                             <div className="modal__container explanation">
+                                <button onClick={() => setModal(false)} className="modal__closeBtn closeBtn">
+                                    <span className="closeBtn__line" id="upperLine"></span>
+                                    <span className="closeBtn__line" id="underLine"></span>
+                                </button>
                                 <div className="explanation__inner">
                                     <p className="explanation__title">難易度説明</p>
                                     <div className="explanation__container">
@@ -74,12 +72,11 @@ function modal({ mode, state, setModal }: modalProps) {
                 return (
                     <div className="modal">
                         <div className="modal__origin">
-                            <button onClick={() => setModal(false)} className="modal__closeBtn closeBtn">
-                                <span className="closeBtn__line" id="upperLine"></span>
-                                <span className="closeBtn__line" id="underLine"></span>
-                            </button>
-
                             <div className="modal__container help">
+                                <button onClick={() => setModal(false)} className="modal__closeBtn closeBtn">
+                                    <span className="closeBtn__line" id="upperLine"></span>
+                                    <span className="closeBtn__line" id="underLine"></span>
+                                </button>
                                 <div className="help__inner">
                                     <p className="help__title">遊び方</p>
                                     <div className="help__content">

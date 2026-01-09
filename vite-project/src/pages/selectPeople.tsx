@@ -1,6 +1,5 @@
 //*プレイ人数を決める画面
 //*必要機能をインポート
-import React, { useState, useEffect } from 'react';
 import Btn from "../components/btn";
 import UserContainer from "../components/userContainer";
 

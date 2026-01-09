@@ -1,5 +1,4 @@
 //必要機能のインポート
-import selectImg from "../pages/selectImg";
 
 //キャラクターのデータを設定
 interface characterData {
@@ -13,11 +12,6 @@ const CharaContainer: React.FC<characterData> = ({ level, characterImg, clickEve
     //クラス名を作成
     const baseClass = "level__img";
     const combinedClass = `${baseClass} ${level}`;
-
-    //画像がクリックされたら親に通知
-    const handleSelectImg = () => {
-        console.log("対象がクリックされました。");
-    }
 
     //表示するhtmlを作成
     return (

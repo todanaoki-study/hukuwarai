@@ -7,7 +7,7 @@ import Btn from '../components/btn';
 import Modal from "../components/modal";
 
 //必要なデータ型をインポート
-import type { PartData, CharacterAsset } from "../types/partsData";
+import type { PartData } from "../types/partsData";
 import type { Player } from "../types/playerData";
 
 //親（App.tsx）から渡ってくるゲーム状態を受け取るための型を用意。
@@ -19,7 +19,7 @@ interface PlayProps {
     sampleImg: string; // ★お手本画像のURLを受け取るために追加
 }
 
-const Play: React.FC<PlayProps> = ({ setGameState, parts, updatePartPos, playerList, sampleImg }) => {
+const Play: React.FC<PlayProps> = ({ setGameState, parts, updatePartPos, sampleImg }) => {
 
     let modalMode = "help";
     const [isModalOpen, setIsModalOpen] = useState<boolean>(true);

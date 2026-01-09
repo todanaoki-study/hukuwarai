@@ -1,6 +1,5 @@
 //*ユーザーアイコンと、アイコン＋名前の組み合わせのコンポーネント
 //*必要機能をimport
-import React from 'react';
 
 //親から渡されるユーザー情報を受け取るための型を定義
 interface userData {
