@@ -3,6 +3,9 @@
 import React from 'react';
 import Btn from '../components/btn';
 
+//画像のインポート
+import logo from "../assets/logo/logo.png";
+
 //親（App.tsx）から渡ってくるゲーム状態を受け取るための型を用意。
 interface TitleProps {
     setGameState: (state: "title" | "selectPeople" | "selectImg" | "play" | "result") => void;
@@ -16,7 +19,7 @@ const Title: React.FC<TitleProps> = ({ setGameState }) => {
             <div className="title__inner">
                 <div className="title__container">
                     <h1 className='title__title'>
-                        <img className='title__logo' src="/src/assets/logo/logo.png" alt="" />
+                        <img className='title__logo' src={logo} alt="" />
                     </h1>
                     <div className='title__controller'>
                         <Btn

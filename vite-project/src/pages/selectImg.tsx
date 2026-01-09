@@ -8,6 +8,11 @@ import Img from "../components/charaContainer";
 //必要なデータタイプを読み込む
 import { CHARACTER_ASSETS } from "../data/characterAsset";
 
+//画像をインポート
+import easy from "../assets/other/egg.png";
+import normal from "../assets/other/chick.png";
+import hard from "../assets/other/chicken.png";
+
 //親（App.tsx）から渡ってくるゲーム状態を受け取るための型を用意。
 interface selectImgProps {
     onSelect: (id: string) => void;
@@ -30,21 +35,21 @@ const selectImg: React.FC<selectImgProps> = ({ onSelect }) => {
                 <div className="selectImg__levelList" onClick={() => setIsModalOpen(true)}>
                     <dl className="selectImg__levelItem">
                         <dt className="selectImg__levelImg">
-                            <img className="selectImg__levelIcon" src="src/assets/other/egg.png" alt="" />
+                            <img className="selectImg__levelIcon" src={easy} alt="" />
                         </dt>
                         <dd className="selectImg__caption font-daruma">かんたん</dd>
                     </dl>
 
                     <dl className="selectImg__levelItem">
                         <dt className="selectImg__levelImg">
-                            <img className="selectImg__levelIcon" src="src/assets/other/chick.png" alt="" />
+                            <img className="selectImg__levelIcon" src={normal} alt="" />
                         </dt>
                         <dd className="selectImg__caption font-daruma">ふつう</dd>
                     </dl>
 
                     <dl className="selectImg__levelItem">
                         <dt className="selectImg__levelImg">
-                            <img className="selectImg__levelIcon" src="src/assets/other/chicken.png" alt="" />
+                            <img className="selectImg__levelIcon" src={hard} alt="" />
                         </dt>
                         <dd className="selectImg__caption font-daruma">むずかしい</dd>
                     </dl>

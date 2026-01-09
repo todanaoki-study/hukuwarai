@@ -4,6 +4,9 @@
 import React from 'react';
 import Btn from '../components/btn';
 
+//画像のインポート
+import logo from "../assets/logo/logo.png";
+
 //親（App.tsx）から渡ってくるゲーム状態を受け取るための型を用意。
 interface SplashProps {
     setGameState: (state: "splash" | "title" | "play" | "result") => void;
@@ -17,7 +20,7 @@ const Splash: React.FC<SplashProps> = ({ setGameState }) => {
             <div className="splash__inner">
                 <div className="splash__container">
                     <h1>
-                        <img className='splash__logo' src="/src/assets/logo/logo.png" alt="" />
+                        <img className='splash__logo' src={logo} alt="" />
                     </h1>
 
                     <Btn
